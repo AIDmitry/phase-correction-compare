@@ -1,4 +1,4 @@
-git clc;
+clc;
 close all;
 clear all;
 
