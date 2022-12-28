@@ -184,4 +184,8 @@ crosscoerr2(i)=max(abs(xcorr(sig1after, sig2after)))/mean(abs(xcorr(sig1after, s
 end
 
 figure;
-title(["Взаимняа
+title(["Взаимняа корреляция"]);
+subplot(2,1,1);
+plot(crosscoerr1);
+subplot(2,1,2);
+plot(crosscoerr2);
