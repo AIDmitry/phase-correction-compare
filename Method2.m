@@ -49,9 +49,10 @@ signal1=signal1(1+lag1:end);
 
 %%
 tic
-N=50; % кол-во кусочков
+N=30; % кол-во кусочков
 
-d=6e6/N;% длина кусочков
+d=length(signal1)/N;% длина кусочков
+d=floor(d);
 A1=[];
 pos1=[];
 phases1=[];
@@ -67,7 +68,11 @@ phases1=rot90(rot90(phases1));% разворот массива фаз; пики
 phases1=repmat(phases1, d, 1); %интерполяция сигнала корреккции на ЧД сигналов 
 phases1=phases1(:);
 
-sig1=signal1.*exp(-j*phases1(1:length(signal1))); % коррекция
+L=min(length(signal1), length(phases1));
+phases1=phases1(1:L);
+signal1=signal1(1:L);
+
+sig1=signal1.*exp(-j*phases1); % коррекция
 
 figure; 
 subplot(2,1,1);
@@ -77,6 +82,8 @@ subplot(2,1,2)
 plot(abs(xcorr(sig1, psp)));
 title("Корреляция сигнала sat21 после коррекции");
 
+d=length(signal2)/N;% длина кусочков
+d=floor(d);
 A2=[];
 pos2=[];
 phases2=[];
@@ -92,7 +99,11 @@ phases2=rot90(rot90(phases2));
 phases2=repmat(phases2,d, 1);
 phases2=phases2(:);
 
-sig2=signal2.*exp(-j*phases2(1:length(signal2)));
+L=min(length(signal2), length(phases2));
+phases2=phases2(1:L);
+signal2=signal2(1:L);
+
+sig2=signal2.*exp(-j*phases2);
 
 figure;
 subplot(2,1,1)
