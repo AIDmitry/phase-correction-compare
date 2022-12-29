@@ -49,7 +49,7 @@ signal1=signal1(1+lag1:end);
 
 %%
 tic
-N=100; % кол-во кусочков
+N=500; % кол-во кусочков
 
 d=length(signal1)/N;% длина кусочков
 d=floor(d);
@@ -103,7 +103,7 @@ phases2=phases2(:);
 L=min(length(signal2), length(phases2));
 phases2=phases2(1:L);
 signal2=signal2(1:L);
-phases2=phases2-phases2(2);
+phases2=phases2-phases2(1);
 
 sig2=signal2.*exp(-j*phases2);
 
