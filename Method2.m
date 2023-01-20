@@ -62,18 +62,15 @@ for i=1:N
 phases1(i)=angle(corr(pos1(i)));% вычисление фазы пика
 end
 
-%phases1=rot90(rot90(phases1));% разворот массива фаз; пики идут в обратном порядке, см массив pos, взаимная корреляция без разворота хуже
-
-
 phases1=repmat(phases1, d, 1); %интерполяция сигнала корреккции на ЧД сигналов 
 phases1=phases1(:);
 
 L=min(length(signal1), length(phases1));
 phases1=phases1(1:L);
 signal1=signal1(1:L);
-phases1=phases1-phases1(1);
+%phases1=phases1-phases1(1);
 
-sig1=signal1.*exp(-j*phases1); % коррекция
+sig1=signal1.*(exp(j*phases1)); % коррекция
 
 figure; 
 subplot(2,1,1);
@@ -94,9 +91,6 @@ for i=1:N
 phases2(i)=angle(corr(pos2(i)));
 end
 
-
-%phases2=rot90(rot90(phases2));
-
 phases2=repmat(phases2,d, 1);
 phases2=phases2(:);
 
@@ -105,7 +99,7 @@ phases2=phases2(1:L);
 signal2=signal2(1:L);
 phases2=phases2-phases2(1);
 
-sig2=signal2.*exp(-j*phases2);
+sig2=signal2.*(exp(j*phases2));
 
 figure;
 subplot(2,1,1)
